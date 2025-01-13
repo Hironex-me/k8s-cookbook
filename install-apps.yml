@@ -5,18 +5,12 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - matrix:
-        generators:
-          - git:
-              repoURL: https://github.com/Hironex-me/k8s-cookbook.git
-              revision: main
-              directories:
-                # Add your project path
-                - path: test.app
-          - clusters:
-              selector:
-                matchLabels:
-                  kubernetes.io/hostname: minikube
+    - git:
+        repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+        revision: main
+        directories:
+          # Add your project path
+          - path: test.app
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
