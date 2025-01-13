@@ -17,6 +17,8 @@ spec:
   template:
     metadata:
       name: 'prod-{{path.basename}}'
+      annotations:
+        notifications.argoproj.io/subscribe.sync-operation-change.slack: ch-test-xitment-leadtime
     spec:
       project: default
       source:
