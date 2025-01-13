@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: production-apps
-  namespace: production
+  namespace: argocd
 spec:
   generators:
     - matrix:
