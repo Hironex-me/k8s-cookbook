@@ -16,7 +16,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  env: 'production'
+                  kubernetes.io/metadata.name: 'production'
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
@@ -29,7 +29,7 @@ spec:
         targetRevision: master
         path: '{{path}}/production'
       destination:
-        name: '{{name}}'
+        server: https://kubernetes.default.svc
         namespace: 'production'
       syncPolicy:
         automated: {}
