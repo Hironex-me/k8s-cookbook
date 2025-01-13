@@ -9,7 +9,7 @@ spec:
         generators:
           - git:
               repoURL: https://github.com/Hironex-me/k8s-cookbook.git
-              revision: master
+              revision: main
               directories:
                 # Add your project path
                 - path: test.app
