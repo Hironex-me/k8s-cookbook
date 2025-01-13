@@ -16,7 +16,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  kubernetes.io/metadata.name: 'production'
+                  env: 'production'
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
