@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: second-nginx
+  labels:
+    run: second-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: second-nginx

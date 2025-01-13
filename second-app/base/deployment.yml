@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-nginx
+spec:
+  selector:
+    matchLabels:
+      run: second-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: second-nginx
+    spec:
+      containers:
+      - name: second-nginx
+        image: nginx:1.26.2
+        ports:
+        - containerPort: 80
