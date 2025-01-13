@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prod
+  namespace: production
+spec:
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+              revision: master
+              directories:
+                # Add your project path
+                - path: test.app
+          - clusters:
+              selector:
+                matchLabels:
+                  env: 'production'
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: 'prod-{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+        targetRevision: master
+        path: '{{path}}/production'
+      destination:
+        name: '{{name}}'
+        namespace: 'production'
+      syncPolicy:
+        automated: {}
