@@ -16,7 +16,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  env: 'production'
+                  kubernetes.io/hostname: minikube
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
