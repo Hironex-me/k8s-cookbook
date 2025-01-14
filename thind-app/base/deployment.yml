@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: third-nginx
+spec:
+  selector:
+    matchLabels:
+      run: third-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: third-nginx
+    spec:
+      containers:
+      - name: third-nginx
+        image: nginx:1.26.2-alpine
+        ports:
+        - containerPort: 80
