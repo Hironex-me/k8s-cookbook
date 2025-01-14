@@ -10,7 +10,7 @@ spec:
         revision: main
         directories:
           # Add your project path
-          - path: First-app
+          - path: first-app
           - path: second-app
   syncPolicy:
     preserveResourcesOnDeletion: true
