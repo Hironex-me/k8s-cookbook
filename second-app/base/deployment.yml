@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    my-customize-field: "helloworld"
   name: second-nginx
 spec:
   selector:
