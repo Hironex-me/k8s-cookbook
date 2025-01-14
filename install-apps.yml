@@ -20,7 +20,9 @@ spec:
       name: 'prod-{{path.basename}}'
       annotations:
         notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
+        notifications.argoproj.io/subscribe.on-deploy-succeeded.webhook: ""
         notifications.argoproj.io/subscribe.on-deploy-failed.slack: ch-test-xitment-release
+
     spec:
       project: default
       source:
