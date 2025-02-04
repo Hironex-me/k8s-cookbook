@@ -13,8 +13,6 @@ spec:
           - path: first-app
           - path: second-app
           # - path: third-app
-        files:
-          - path: 'first-app/production/commit-meta.json'
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
