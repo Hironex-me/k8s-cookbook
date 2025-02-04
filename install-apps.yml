@@ -24,8 +24,8 @@ spec:
         notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
         notifications.argoproj.io/subscribe.on-deploy-succeeded.support-api: ""
         notifications.argoproj.io/subscribe.on-deploy-failed.slack: ch-test-xitment-release
-        app.kubernetes.io/git-commit-sha: '{{files.commit-meta\\.json.commit}}'
-        app.kubernetes.io/git-author: '{{files.commit-meta\\.json.author}}'
+        app.kubernetes.io/git-commit-sha: '{{.commit}}'
+        app.kubernetes.io/git-author: '{{.author}}'
     spec:
       project: default
       source:
