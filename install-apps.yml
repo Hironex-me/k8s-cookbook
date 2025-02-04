@@ -14,7 +14,7 @@ spec:
           - path: second-app
           # - path: third-app
         files:
-          - path: '{{path}}/production/commit-meta.json'
+          - path: 'first-app/production/commit-meta.json'
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
