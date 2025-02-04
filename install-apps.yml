@@ -5,17 +5,26 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/Hironex-me/k8s-cookbook.git
-        revision: main
-        files: 
-          - path: 'apps/production/*.json'
+  - matrix:
+    - generators:
+      - git:
+          repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+          revision: main
+          files: 
+            - path: 'apps/production/*.json'
+          pathParamPrefix: app
+      - git:
+          repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+          revision: main
+          directories:
+            - path: '{{.appName}}'
+          pathParamPrefix: target
             
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
     metadata:
-      name: 'prod-{{.appName}}'
+      name: 'prod-{{.path.basename}}'
       annotations:
         notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
         notifications.argoproj.io/subscribe.on-deploy-succeeded.support-api: ""
@@ -27,7 +36,7 @@ spec:
       source:
         repoURL: https://github.com/Hironex-me/k8s-cookbook.git
         targetRevision: HEAD
-        path: '{{.appName}}/production'
+        path: '{{.path}}/production'
       destination:
         server: https://kubernetes.default.svc
         namespace: 'production'
