@@ -3,3 +3,13 @@ kind: Kustomization
 
 resources:
 - ../base
+
+patches:
+- patch: |-
+    - op: add
+      path: /metadata/annotations/app.kubernetes.io~git-commit
+      value: a1b2c3d4
+  target:
+    kind: Application
+    name: prod-first-app
+
