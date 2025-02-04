@@ -6,7 +6,7 @@ resources:
 
 patches:
 - patch: |-
-    - op: add
+    - op: replace
       path: /metadata/annotations/app.kubernetes.io~git-commit
       value: a1b2c3d4
   target:
