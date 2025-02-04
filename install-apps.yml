@@ -5,33 +5,36 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/Hironex-me/k8s-cookbook.git
-        revision: main
-        directories:
-          # Add your project path
-          - path: first-app
-          - path: second-app
-          # - path: third-app
-        files:
-          - path: 'first-app/production/commit-meta.json'
+  - matrix:
+    - generators:
+      - git:
+          repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+          revision: main
+          files: 
+            - path: 'apps/production/*.json'
+      - git:
+          repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+          revision: main
+          directories:
+            - path: '{{.appName}}'
+            
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
     metadata:
-      name: 'prod-{{path.basename}}'
+      name: 'prod-{{.path.basename}}'
       annotations:
         notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
         notifications.argoproj.io/subscribe.on-deploy-succeeded.support-api: ""
         notifications.argoproj.io/subscribe.on-deploy-failed.slack: ch-test-xitment-release
-        app.kubernetes.io/git-commit-sha: '{{.commit}}'
-        app.kubernetes.io/git-author: '{{.author}}'
+        app.kubernetes.io/git-commit-sha: '{{.commitMeta.commit}}'
+        app.kubernetes.io/git-author: '{{.commitMeta.author}}'
     spec:
       project: default
       source:
         repoURL: https://github.com/Hironex-me/k8s-cookbook.git
         targetRevision: HEAD
-        path: '{{path}}/production'
+        path: '{{.path}}/production'
       destination:
         server: https://kubernetes.default.svc
         namespace: 'production'
