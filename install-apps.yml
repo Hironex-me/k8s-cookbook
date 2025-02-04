@@ -12,13 +12,11 @@ spec:
           revision: main
           files: 
             - path: 'apps/production/*.json'
-          pathParamPrefix: app
       - git:
           repoURL: https://github.com/Hironex-me/k8s-cookbook.git
           revision: main
           directories:
             - path: '{{.appName}}'
-          pathParamPrefix: target
             
   syncPolicy:
     preserveResourcesOnDeletion: true
