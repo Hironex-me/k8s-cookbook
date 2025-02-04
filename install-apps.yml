@@ -13,6 +13,8 @@ spec:
           - path: first-app
           - path: second-app
           # - path: third-app
+        files:
+          - path: '{{path}}/production/commit-meta.json'
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
@@ -22,7 +24,8 @@ spec:
         notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
         notifications.argoproj.io/subscribe.on-deploy-succeeded.support-api: ""
         notifications.argoproj.io/subscribe.on-deploy-failed.slack: ch-test-xitment-release
-
+        app.kubernetes.io/git-commit-sha: '{{files.commit-meta.json.commit}}'
+        app.kubernetes.io/git-author: '{{files.commit-meta.json.author}}'
     spec:
       project: default
       source:
