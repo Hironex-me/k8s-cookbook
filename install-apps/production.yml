@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: production-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+        revision: main
+        directories:
+          # Add your project path
+          - path: first-app
+          - path: second-app
+          # - path: third-app
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  template:
+    metadata:
+      name: 'prod-{{path.basename}}'
+      annotations:
+        notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
+        notifications.argoproj.io/subscribe.on-deploy-succeeded.support-api: ""
+        notifications.argoproj.io/subscribe.on-deploy-failed.slack: ch-test-xitment-release
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/Hironex-me/k8s-cookbook.git
+        targetRevision: HEAD
+        path: '{{path}}/production'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'production'
+      syncPolicy:
+        automated: {}
