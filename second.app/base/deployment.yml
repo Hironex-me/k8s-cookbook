@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: second-nginx
-        image: nginx:1.26.2
+        image: nginx:1.26.1
         ports:
         - containerPort: 80
