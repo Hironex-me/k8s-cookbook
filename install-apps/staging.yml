@@ -18,6 +18,7 @@ spec:
   template:
     metadata:
       name: 'stg-{{path.basename}}'
+      projectName: '{{path.basename}}'
       annotations:
         notifications.argoproj.io/subscribe.on-deploy-succeeded.slack: ch-test-xitment-release
         notifications.argoproj.io/subscribe.on-deploy-succeeded.support-api: ""
