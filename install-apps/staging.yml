@@ -10,7 +10,7 @@ spec:
         revision: main
         directories:
           # Add your project path
-          - path: first-app
+          - path: first.app
           # - path: second-app
           # - path: third-app
   syncPolicy:
